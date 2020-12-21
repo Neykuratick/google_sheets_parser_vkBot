@@ -185,7 +185,7 @@ while True:
                     send_message(id,
                                  'https://docs.google.com/spreadsheets/d/1sN4war5N8FGEkomKv0Vo-lwLmREsEmXt/edit#gid=112716612')
 
-                if 'сёдня пары' in message or 'пары сёдня' or 'пары пары' in message:
+                if 'сёдня пары' in message or 'пары сёдня' or 'пары пары' or 'парыыы' in message:
                     send_message(id, bc.AllForToday())
 
                 if 'завтра пары' in message or 'пары завтра' in message:
