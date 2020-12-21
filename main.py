@@ -10,7 +10,11 @@ import vk_api
 # pip3 install --user --upgrade google-api-python-client
 # pip3 install --user --upgrade oauth2client
 
-#git push -u myorigin main
+"""
+git add .
+git commit -m "commit"
+git push -u myorigin main
+"""
 
 sh = SheetHandler()
 ch = ConnectSheet()
