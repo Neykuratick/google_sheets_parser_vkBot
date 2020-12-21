@@ -10,12 +10,6 @@ import vk_api
 # pip3 install --user --upgrade google-api-python-client
 # pip3 install --user --upgrade oauth2client
 
-"""
-git add .
-git commit -m "commit"
-git push -u myorigin main
-"""
-
 sh = SheetHandler()
 ch = ConnectSheet()
 bc = Backend()
@@ -24,6 +18,12 @@ bc = Backend()
 # group_id = 196530881  # testing
 TOKEN = 'efa8f72bc9f5aab07245dbc8eb42f58551b1c56be06fc8ac549a92db582a9dfbd6866d44351067cd08534'  # release
 group_id = 198604544  # release
+
+"""
+git add .
+git commit -m "commit"
+git push -u myorigin main
+"""
 
 vk = vk_api.VkApi(token=TOKEN)
 vk._auth_token()
@@ -179,7 +179,7 @@ while True:
 
                 # --
 
-                if 'ссылка' in message:
+                if 'ссылка' in message and not 'наебнулась' in message:
                     send_message(id,
                                  'https://docs.google.com/spreadsheets/d/1sN4war5N8FGEkomKv0Vo-lwLmREsEmXt/edit#gid=112716612')
 
@@ -218,7 +218,7 @@ while True:
 
                 # --
 
-                if 'ссылки не работают' in message:
+                if ("ссылка" in message or "ссылки" in message) and ("опять" in message):
                     send_message(id,
                                  'https://www.pythonanywhere.com/user/Neykuratick/files/home/Neykuratick/main.py?edit')
 
