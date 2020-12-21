@@ -23,6 +23,7 @@ group_id = 198604544  # release
 git add .
 git commit -m "commit"
 git push -u myorigin main
+git push heroku main
 """
 
 vk = vk_api.VkApi(token=TOKEN)
