@@ -24,6 +24,7 @@ git add .
 git commit -m "commit"
 git push -u myorigin main
 git push heroku main
+heroku ps:scale worker=1
 """
 
 vk = vk_api.VkApi(token=TOKEN)
@@ -248,6 +249,9 @@ while True:
 
                 if "бля" in message or "хуй" in message or "пизд" in message:
                     send_message(id, 'ъуъ, не матерись, сука блеать')
+
+                if "heroku" in message:
+                    send_message(id, 'Хуёку, блять')
 
                 if 'за' in message and 'мат' in message and ('извини' in message or 'извени' in message or 'прости' in message or 'сорян' in message):
                     send_message(id, 'Привет, это Замат. Я прощаю тебя, но больше так не будь')
