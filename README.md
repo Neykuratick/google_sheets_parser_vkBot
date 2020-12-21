@@ -1,3 +1,2 @@
 "# timetable-vk-bot" 
-"# vkbot" 
-"# empty" 
+"# mynewbot" 
