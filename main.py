@@ -250,6 +250,9 @@ while True:
                 if "бля" in message or "хуй" in message or "пизд" in message:
                     send_message(id, 'ъуъ, не матерись, сука блеать')
 
+                if "седня пары" in message or "пары седня" in message:
+                    send_message(id, 'Кирилл с Мефодием старались, придумывсали букавы а ты вот так вот знчит к ним относишься, да? Напоминаю, что у нас помимо е есть еще ё!!!')
+
                 if "heroku" in message:
                     send_message(id, 'Хуёку, блять')
 
