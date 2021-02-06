@@ -186,17 +186,20 @@ while True:
                 if 'ссылк' in message and not 'наебнулась' in message:
                     send_message(id,
                                  'https://docs.google.com/spreadsheets/d/1bAFmdln_FvbtKY-WMmSj_cyhH9l3ELgo/edit')
-
+f
                 if 'пары' in message:
                     if 'сёдня' in message:
-                        message = "bc.AllForToday() \n" + print(bc.AllForToday()) + "\n" + bc.AllForToday()
-                        send_message(id, message)
+                        message = "e" + bc.AllForToday()
+                        if message == "e":
+                            send_message(id, "bc.tomorrowClasses()\ncёдня адыхаем")
+                        else:
+                            send_message(id, bc.AllForToday())
                     if 'завтра' in message:
-                        message = "bc.bc.tomorrowClasses() \n" + print(bc.tomorrowClasses()) + "\n" +  bc.tomorrowClasses()
+                        message = "bc.tomorrowClasses() \n" + bc.tomorrowClasses()
                         send_message(id, message)
                     if 'понедельник' in message or 'пн' in message:
                         send_message(id, bc.byDay(0))
-                    if 'вторник' in message or 'вт' in message:
+                    if 'вторник' in message:
                         send_message(id, bc.byDay(1))
                     if 'сред' in message or 'ср' in message:
                         send_message(id, bc.byDay(2))
