@@ -4,25 +4,6 @@
     <list default="true" id="c3708db6-8c18-45bb-a000-db35d2318a12" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/rpc/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/rpc/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/rpc/code_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/rpc/code_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/rpc/context/attribute_context_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/rpc/context/attribute_context_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/rpc/error_details_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/rpc/error_details_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/rpc/status_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/rpc/status_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/calendar_period_pb2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/color_pb2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/date_pb2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/datetime_pb2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/dayofweek_pb2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/expr_pb2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/fraction_pb2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/latlng_pb2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/money_pb2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/month_pb2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/postal_address_pb2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/quaternion_pb2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/timeofday_pb2.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +73,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1604824441492</updated>
-      <workItem from="1612630426882" duration="381000" />
+      <workItem from="1612630426882" duration="856000" />
+      <workItem from="1612631316969" duration="323000" />
     </task>
     <servers />
   </component>

@@ -189,8 +189,12 @@ while True:
 
                 if 'пары' in message:
                     if 'сёдня' in message:
+                        send_message(id, "bc.AllForToday()")
+                        send_message(id, print(bc.AllForToday()))
                         send_message(id, bc.AllForToday())
                     if 'завтра' in message:
+                        send_message(id, "bc.bc.tomorrowClasses()")
+                        send_message(id, print(bc.tomorrowClasses()))
                         send_message(id, bc.tomorrowClasses())
                     if 'понедельник' in message or 'пн' in message:
                         send_message(id, bc.byDay(0))
