@@ -147,51 +147,63 @@ while True:
                 message = event.object.text.lower()
                 id = event.object.peer_id
 
-                if 'понедельник покежь' in message:
-                    send_message(id, bc.byDay(0))
+                if 'покежь' in message:
+                    if 'понедельник' in message:
+                        send_message(id, bc.byDay(0))
 
-                if 'вторник покежь' in message:
-                    send_message(id, bc.byDay(1))
+                    if 'вторник' in message:
+                        send_message(id, bc.byDay(1))
 
-                if 'среду покежь' in message:
-                    send_message(id, bc.byDay(2))
+                    if 'среду' in message:
+                        send_message(id, bc.byDay(2))
 
-                if 'четверг покежь' in message:
-                    send_message(id, bc.byDay(3))
+                    if 'четверг' in message:
+                        send_message(id, bc.byDay(3))
 
-                if 'пятницу покежь' in message:
-                    send_message(id, bc.byDay(4))
-
-                # --
-
-                if 'понедельник на следующей неделе покежь' in message:
-                    send_message(id, bc.byDayNext(0))
-
-                if 'вторник на следующей неделе покежь' in message:
-                    send_message(id, bc.byDayNext(1))
-
-                if 'среду на следующей неделе покежь' in message:
-                    send_message(id, bc.byDayNext(2))
-
-                if 'четверг на следующей неделе покежь' in message:
-                    send_message(id, bc.byDayNext(3))
-
-                if 'пятницу на следующей неделе покежь' in message:
-                    send_message(id, bc.byDayNext(4))
+                    if 'пятницу' in message:
+                        send_message(id, bc.byDay(4))
 
                 # --
 
-                if 'ссылка' in message and not 'наебнулась' in message:
+                if 'на следующей неделе покежь' in message:
+                    if 'понедельник' in message:
+                        send_message(id, bc.byDayNext(0))
+
+                    if 'вторник' in message:
+                        send_message(id, bc.byDayNext(1))
+
+                    if 'сред' in message:
+                        send_message(id, bc.byDayNext(2))
+
+                    if 'четверг' in message:
+                        send_message(id, bc.byDayNext(3))
+
+                    if 'пятниц' in message:
+                        send_message(id, bc.byDayNext(4))
+
+                # --
+
+                if 'ссылк' in message and not 'наебнулась' in message:
                     send_message(id,
-                                 'https://docs.google.com/spreadsheets/d/1sN4war5N8FGEkomKv0Vo-lwLmREsEmXt/edit#gid=112716612')
+                                 'https://docs.google.com/spreadsheets/d/1bAFmdln_FvbtKY-WMmSj_cyhH9l3ELgo/edit')
 
-                if 'сёдня пары' in message or 'пары сёдня' in message or 'пары пары' in message or 'парыыы' in message:
-                    send_message(id, bc.AllForToday())
+                if 'пары' in message:
+                    if 'сёдня' in message:
+                        send_message(id, bc.AllForToday())
+                    if 'завтра' in message:
+                        send_message(id, bc.tomorrowClasses())
+                    if 'понедельник' in message or 'пн' in message:
+                        send_message(id, bc.byDay(0))
+                    if 'вторник' in message or 'вт' in message:
+                        send_message(id, bc.byDay(1))
+                    if 'сред' in message or 'ср' in message:
+                        send_message(id, bc.byDay(2))
+                    if 'четверг' in message or 'чт' in message:
+                        send_message(id, bc.byDay(3))
+                    if 'пятниц' in message or 'пт' in message:
+                        send_message(id, bc.byDay(4))
 
-                if 'завтра пары' in message or 'пары завтра' in message:
-                    send_message(id, bc.tomorrowClasses())
-
-                if 'черта' in message:
+                if 'черт' in message:
                     week = datetime.date.today().isocalendar()[1]
                     if week % 2 == 0:
                         send_message(id, 'Сегодня смотрим над чертой')
