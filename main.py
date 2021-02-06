@@ -186,7 +186,7 @@ while True:
                 if 'ссылк' in message and not 'наебнулась' in message:
                     send_message(id,
                                  'https://docs.google.com/spreadsheets/d/1bAFmdln_FvbtKY-WMmSj_cyhH9l3ELgo/edit')
-f
+fwegwegww
                 if 'пары' in message:
                     if 'сёдня' in message:
                         message = "e" + bc.AllForToday()
