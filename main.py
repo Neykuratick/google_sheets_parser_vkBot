@@ -145,9 +145,10 @@ while True:
                     log.write('Used. Time: ' + now + '. By: ' + chat_id + '\n')
 
                 message = event.object.text.lower()
+                message += "LOCAL\n" # todo delete
                 id = event.object.peer_id
 
-                if 'покежь' in message:
+                if 'покежь' in message and not "на следующей неделе" in message:
                     if 'понедельник' in message:
                         send_message(id, bc.byDay(0))
 
@@ -186,14 +187,10 @@ while True:
                 if 'ссылк' in message and not 'наебнулась' in message:
                     send_message(id,
                                  'https://docs.google.com/spreadsheets/d/1bAFmdln_FvbtKY-WMmSj_cyhH9l3ELgo/edit')
-fwegwegww
+
                 if 'пары' in message:
                     if 'сёдня' in message:
-                        message = "e" + bc.AllForToday()
-                        if message == "e":
-                            send_message(id, "bc.tomorrowClasses()\ncёдня адыхаем")
-                        else:
-                            send_message(id, bc.AllForToday())
+                        send_message(id, "bc.AllForToday() \n" + bc.AllForToday())
                     if 'завтра' in message:
                         message = "bc.tomorrowClasses() \n" + bc.tomorrowClasses()
                         send_message(id, message)

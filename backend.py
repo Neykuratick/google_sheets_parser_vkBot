@@ -34,8 +34,8 @@ class Backend:
     def scraper(self, weekday, week):
         text = ''
 
-        firstclass = weekday * 10
-        lastclass = firstclass + 10
+        firstclass = weekday * 11
+        lastclass = firstclass + 11
 
         if week % 2 == 0:
             firstclass_const = 1
@@ -71,9 +71,7 @@ class Backend:
             except:
                 pass
 
-            text += '[НЕ ТОЧНО!!] Пара матана\n\n'
-            text += '[НЕ ТОЧНО!!] Пара матана\n\n'
-            text += '[НЕ ТОЧНО!!] Пара матана\n\n'
+            text += '' # [НЕ ТОЧНО!!] 10:40 - 12:10 Пара Программирования
 
         elif weekday == 4 and week % 2 != 0:  # adds programming classes in case if they're not in there
             try:
@@ -88,13 +86,15 @@ class Backend:
             except:
                 pass
 
-            text += '[НЕ ТОЧНО!!] 10:40 - 12:10 Пара Программирования\n\n'
+            text += ''
 
         return text
 
     def AllForToday(self):
         weekday = datetime.datetime.today().weekday()
         week = datetime.date.today().isocalendar()[1]
+        if weekday == 4 or weekday == 5:  # if tomorrow is saturday or sunday
+            return "Сёдня адыхаем"
 
         return self.scraper(weekday, week)
 
