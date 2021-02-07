@@ -145,7 +145,6 @@ while True:
                     log.write('Used. Time: ' + now + '. By: ' + chat_id + '\n')
 
                 message = event.object.text.lower()
-                message += "LOCAL\n" # todo delete
                 id = event.object.peer_id
 
                 if 'покежь' in message and not "на следующей неделе" in message:
