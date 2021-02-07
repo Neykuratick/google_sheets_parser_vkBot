@@ -204,6 +204,9 @@ while True:
                     if 'пятниц' in message or 'пт' in message:
                         send_message(id, bc.byDay(4))
 
+                if 'какой' in message and 'к ' in message and 'завтра' in message:
+                    send_message(id, bc.tomorrowClasses())
+
                 if 'черт' in message:
                     week = datetime.date.today().isocalendar()[1]
                     if week % 2 == 0:
