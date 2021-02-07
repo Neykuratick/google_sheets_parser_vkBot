@@ -254,7 +254,7 @@ while True:
                     if hahasCount > 7:
                         send_message(id, '1010101010101110101001 - НАСТОЛЬКО СИЛЬНО Я ОРУ ЫВХАЫХВАХЫВАХЫ')
 
-                if 'скотина ты бот' in message:
+                if 'скотина' in message and 'бот' in message:
                     if str(id) == '2000000002' or str(id) == '232444433' or str(id) == '2000000001':
                         send_message(id, 'прости человек, я буду стараться лучше')
                     else:
