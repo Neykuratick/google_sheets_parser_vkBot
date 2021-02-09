@@ -53,7 +53,7 @@ class Backend:
         firstclass = weekday * 10
         lastclass = firstclass + 11
 
-        if week % 2 == 0:
+        if week % 2 != 0:
             firstclass_const = 1
             range_const = 2
         else:
