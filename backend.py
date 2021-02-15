@@ -48,7 +48,23 @@ class Backend:
 
     def scraper(self, weekday, week):
         # print(weekday, week)
-        text = ''
+
+        if weekday == 0:
+            weekday_name = 'Понедельник'
+        if weekday == 1:
+            weekday_name = 'Вторник'
+        if weekday == 2:
+            weekday_name = 'Среда'
+        if weekday == 3:
+            weekday_name = 'Четверг'
+        if weekday == 4:
+            weekday_name = 'Пятница'
+        if weekday == 5:
+            weekday_name = 'Суббота'
+        if weekday == 6:
+            weekday_name = 'Воскресенье'
+
+        text = f'[{weekday_name}]\n\n'
 
         firstclass = weekday * 10
         lastclass = firstclass + 11

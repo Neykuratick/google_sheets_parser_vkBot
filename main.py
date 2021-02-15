@@ -189,7 +189,7 @@ while True:
                                  'https://docs.google.com/spreadsheets/d/1bAFmdln_FvbtKY-WMmSj_cyhH9l3ELgo/edit')
 
                 if 'пары' in message:
-                    if 'сёдня' in message:
+                    if 'сёдня' in message or 'сегодня' in message:
                         send_message(id, bc.AllForToday())
                     if 'завтра' in message:
                         message = bc.tomorrowClasses()
