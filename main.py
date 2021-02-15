@@ -33,6 +33,7 @@ vk.get_api()
 longpoll = VkBotLongPoll(vk, group_id)
 FOO_MESSAGE = 'HELLO'
 
+#foo
 
 def get_button(label, color):
     return {
