@@ -135,18 +135,20 @@ while True:
             if event.type == VkBotEventType.MESSAGE_NEW:
 
                 # writing to log
-                current_time = datetime.datetime.now()
-                now = current_time.strftime("%H:%M:%S")
-                chat_id = str(event.object.peer_id)
-                if chat_id == '2000000001':
-                    chat_id = 'me'
-                if chat_id == '232444433':
-                    chat_id = 'me pm'
-                with open('log.txt', 'a') as log:
-                    log.write('Used. Time: ' + now + '. By: ' + chat_id + '\n')
+                # current_time = datetime.datetime.now()
+                # now = current_time.strftime("%H:%M:%S")
+                # chat_id = str(event.object.peer_id)
+
+                # if chat_id == '2000000001':
+                #     chat_id = 'me'
+                # if chat_id == '232444433':
+                #     chat_id = 'me pm'
+                # with open('log.txt', 'a') as log:
+                #     log.write('Used. Time: ' + now + '. By: ' + chat_id + '\n')
 
                 message = event.object.text.lower()
                 id = event.object.peer_id
+                # id = event.chat_id
 
                 if 'покежь' in message and not "на следующей неделе" in message:
                     if 'понедельник' in message:
@@ -166,7 +168,7 @@ while True:
 
                 # --
 
-                if 'на следующей неделе покежь' in message:
+                if 'на следующей неделе' in message:
                     if 'понедельник' in message:
                         send_message(id, bc.byDayNext(0))
 
@@ -188,7 +190,7 @@ while True:
                     send_message(id,
                                  'https://docs.google.com/spreadsheets/d/1bAFmdln_FvbtKY-WMmSj_cyhH9l3ELgo/edit')
 
-                if 'пары' in message:
+                if 'пары' in message and not "на следующей неделе" in message:
                     if 'сёдня' in message or 'сегодня' in message:
                         send_message(id, bc.AllForToday())
                     if 'завтра' in message:

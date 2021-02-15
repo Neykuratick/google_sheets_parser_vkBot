@@ -51,20 +51,25 @@ class Backend:
 
         if weekday == 0:
             weekday_name = 'Понедельник'
-        if weekday == 1:
+        elif weekday == 1:
             weekday_name = 'Вторник'
-        if weekday == 2:
+        elif weekday == 2:
             weekday_name = 'Среда'
-        if weekday == 3:
+        elif weekday == 3:
             weekday_name = 'Четверг'
-        if weekday == 4:
+        elif weekday == 4:
             weekday_name = 'Пятница'
-        if weekday == 5:
+        elif weekday == 5:
             weekday_name = 'Суббота'
-        if weekday == 6:
+        elif weekday == 6:
             weekday_name = 'Воскресенье'
 
-        text = f'[{weekday_name}]\n\n'
+        if week % 2:
+            line = 'под чертой'
+        else:
+            line = 'над чертой'
+
+        text = f'({weekday_name}, {line}, неделя номер №{week})\n\n'
 
         firstclass = weekday * 10
         lastclass = firstclass + 11
@@ -80,6 +85,7 @@ class Backend:
             # print(f'firstclass - {firstclass}\nfirstclass_const - {firstclass_const}\nlastclass - {lastclass}\nrange_const - {range_const}')
             class_index = 0 # порядковый номер пары
             for subject in range(firstclass + firstclass_const, lastclass, range_const):
+                text += '\n------------------\n'
                 # ch.readCol works by adding 11 to the subject. Subject = 1 is A12 in the spreadsheet.
                 # print(f"subject - {subject}, spreadsheet row - {subject + 11}")
                 class_index += 1
@@ -90,7 +96,7 @@ class Backend:
                     text += getLink(subject)
                 except:
                     pass
-                text += '\n\n'
+                # text += '\n------------------\n\n'
         except:
             pass
 

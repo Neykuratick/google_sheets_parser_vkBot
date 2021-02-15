@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c3708db6-8c18-45bb-a000-db35d2318a12" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +82,7 @@
       <workItem from="1612718107872" duration="1387000" />
       <workItem from="1612752205488" duration="602000" />
       <workItem from="1612839101141" duration="1060000" />
-      <workItem from="1613352389432" duration="450000" />
+      <workItem from="1613352389432" duration="1764000" />
     </task>
     <servers />
   </component>
@@ -92,7 +94,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/backend.py</url>
-          <line>87</line>
+          <line>106</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
