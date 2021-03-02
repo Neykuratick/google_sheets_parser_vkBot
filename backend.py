@@ -9,7 +9,15 @@ week = datetime.date.today().isocalendar()[1]
 class Backend:
 
     def __init__(self):
-        self.text = 'h'
+        self.text = ''
+
+    def whatLine(self):
+        week = datetime.date.today().isocalendar()[1]
+
+        if week % 2:
+            return 'под чертой'
+        else:
+            return 'над чертой'
 
     def addTime(self, classNumber):
         text = ''
@@ -28,26 +36,10 @@ class Backend:
 
         elif classNumber == 5:
             text += '[16:00 - 17:30]:\n'
-
-        # if classNumber % 10 <= 2:
-        #     text += '[09:00 - 10:30]:\n'
-        #
-        # elif 2 < classNumber % 10 <= 4:
-        #     text += '[10:40 - 12:10]:\n'
-        #
-        # elif 4 < classNumber % 10 <= 6:
-        #     text += '[12:40 - 14:10]:\n'
-        #
-        # elif 6 < classNumber % 10 <= 8:
-        #     text += '[14:20 - 15:50]:\n'
-        #
-        # elif 8 < classNumber % 10 <= 10:
-        #     text += '[16:00 - 17:30]:\n'
-
         return text
 
-    def scraper(self, weekday, week):
-        # print(weekday, week)
+    def scraper(self, weekday, week, dayTimedelta=0):
+        # future is how many days to add to the date
 
         if weekday == 0:
             weekday_name = 'Понедельник'
@@ -69,8 +61,6 @@ class Backend:
         else:
             line = 'над чертой'
 
-        text = f'({weekday_name}, {line}, неделя номер №{week})\n\n'
-
         firstclass = weekday * 10
         lastclass = firstclass + 11
 
@@ -81,11 +71,13 @@ class Backend:
             firstclass_const = 2
             range_const = 2
 
+        text = f'({weekday_name}, {line}, неделя номер №{week}, {datetime.date.today() + datetime.timedelta(days=dayTimedelta)})\n\n'
+
         try:
             # print(f'firstclass - {firstclass}\nfirstclass_const - {firstclass_const}\nlastclass - {lastclass}\nrange_const - {range_const}')
-            class_index = 0 # порядковый номер пары
+            class_index = 0  # порядковый номер пары
             for subject in range(firstclass + firstclass_const, lastclass, range_const):
-                text += '\n------------------\n'
+                # text += '\n------------------\n'
                 # ch.readCol works by adding 11 to the subject. Subject = 1 is A12 in the spreadsheet.
                 # print(f"subject - {subject}, spreadsheet row - {subject + 11}")
                 class_index += 1
@@ -96,9 +88,11 @@ class Backend:
                     text += getLink(subject)
                 except:
                     pass
-                # text += '\n------------------\n\n'
+                text += '\n------------------\n\n'
         except:
             pass
+
+        return text
 
         # if weekday < 3 or week % 2 == 0:  # just normal scraping
         #     try:
@@ -148,39 +142,35 @@ class Backend:
         #
         #     text += ''
 
-        return text
-
     def AllForToday(self):
         weekday = datetime.datetime.today().weekday()
         week = datetime.date.today().isocalendar()[1]
-        if weekday == 4 or weekday == 5:  # if tomorrow is saturday or sunday
+        if weekday > 4:  # if tomorrow is saturday or sunday
             return "Сёдня адыхаем"
 
         return self.scraper(weekday, week)
 
-    def byDay(self, day):
-        weekday = day
+    def byDay(self, weekday):
         week = datetime.date.today().isocalendar()[1]
 
-        return self.scraper(weekday, week)
+        dayTimedelta = abs(datetime.datetime.today().weekday() - weekday)
+        return self.scraper(weekday, week, dayTimedelta)
 
     def tomorrowClasses(self):
-        weekday = datetime.datetime.today().weekday()
+        weekday = datetime.datetime.today().weekday() + 1
         week = datetime.date.today().isocalendar()[1]
-        if weekday == 4 or weekday == 5:  # if tomorrow is saturday or sunday
+        if weekday > 4:  # if tomorrow is saturday or sunday
             return "Завтра адыхаем"
-        else:
-            weekday += 1
 
-        if weekday > 4:
+        if weekday > 6:
             weekday = 0
-            week += 1
 
-        return self.scraper(weekday, week)
+        dayTimedelta = abs(datetime.datetime.today().weekday() - weekday)
+        return self.scraper(weekday, week, dayTimedelta)
 
-    def byDayNext(self, day):  # by next week
-        weekday = day
+    def byDayNext(self, weekday):  # by next week
         week = datetime.date.today().isocalendar()[1]
         week += 1
 
-        return self.scraper(weekday, week)
+        dayTimedelta = abs(datetime.datetime.today().weekday() - weekday) + 7
+        return self.scraper(weekday, week, dayTimedelta)

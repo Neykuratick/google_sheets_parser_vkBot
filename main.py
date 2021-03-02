@@ -5,6 +5,7 @@ import json
 import datetime
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 import vk_api
+import time
 
 # pip3 install --user gspread
 # pip3 install --user --upgrade google-api-python-client
@@ -27,13 +28,16 @@ git push heroku main
 heroku ps:scale worker=1
 """
 
-vk = vk_api.VkApi(token=TOKEN)
-vk._auth_token()
-vk.get_api()
-longpoll = VkBotLongPoll(vk, group_id)
-FOO_MESSAGE = 'HELLO'
-
-#foo
+try:
+    vk = vk_api.VkApi(token=TOKEN)
+    vk._auth_token()
+    vk.get_api()
+    longpoll = VkBotLongPoll(vk, group_id)
+    FOO_MESSAGE = 'HELLO'
+except Exception as e:
+    print("Kaput " + e)
+    print("Reconnecting to VK")
+    time.sleep(3)
 
 def get_button(label, color):
     return {
@@ -73,9 +77,9 @@ keyboardHide = str(keyboardHide.decode('utf-8'))
 keyboardThisWeek = {
     'one_time': False,
     'buttons': [
-        [get_button('Понедельник покежь', 'primary'), get_button('Вторник покежь', 'primary'),
-         get_button('Среду покежь', 'primary')],
-        [get_button('Четверг покежь', 'primary'), get_button('Пятницу покежь', 'primary'),
+        [get_button('Понедельник пары', 'primary'), get_button('Вторник пары', 'primary'),
+         get_button('Среду пары', 'primary')],
+        [get_button('Четверг пары', 'primary'), get_button('Пятницу пары', 'primary'),
          get_button('На главную', 'negative')]
     ]
 }
@@ -85,11 +89,11 @@ keyboardThisWeek = str(keyboardThisWeek.decode('utf-8'))
 keyboardNextWeek = {
     'one_time': False,
     'buttons': [
-        [get_button('Понедельник на следующей неделе покежь', 'primary'),
-         get_button('Вторник на следующей неделе покежь', 'primary'),
-         get_button('Среду на следующей неделе покежь', 'primary')],
-        [get_button('Четверг на следующей неделе покежь', 'primary'),
-         get_button('Пятницу на следующей неделе покежь', 'primary'), get_button('На главную', 'negative')]
+        [get_button('Понедельник на следующей неделе пары', 'primary'),
+         get_button('Вторник на следующей неделе пары', 'primary'),
+         get_button('Среду на следующей неделе пары', 'primary')],
+        [get_button('Четверг на следующей неделе пары', 'primary'),
+         get_button('Пятницу на следующей неделе пары', 'primary'), get_button('На главную', 'negative')]
     ]
 }
 keyboardNextWeek = json.dumps(keyboardNextWeek, ensure_ascii=False).encode('utf-8')
@@ -133,42 +137,10 @@ while True:
     try:
         for event in longpoll.listen():
             if event.type == VkBotEventType.MESSAGE_NEW:
-
-                # writing to log
-                # current_time = datetime.datetime.now()
-                # now = current_time.strftime("%H:%M:%S")
-                # chat_id = str(event.object.peer_id)
-
-                # if chat_id == '2000000001':
-                #     chat_id = 'me'
-                # if chat_id == '232444433':
-                #     chat_id = 'me pm'
-                # with open('log.txt', 'a') as log:
-                #     log.write('Used. Time: ' + now + '. By: ' + chat_id + '\n')
-
                 message = event.object.text.lower()
                 id = event.object.peer_id
-                # id = event.chat_id
 
-                if 'покежь' in message and not "на следующей неделе" in message:
-                    if 'понедельник' in message:
-                        send_message(id, bc.byDay(0))
-
-                    if 'вторник' in message:
-                        send_message(id, bc.byDay(1))
-
-                    if 'среду' in message:
-                        send_message(id, bc.byDay(2))
-
-                    if 'четверг' in message:
-                        send_message(id, bc.byDay(3))
-
-                    if 'пятницу' in message:
-                        send_message(id, bc.byDay(4))
-
-                # --
-
-                if 'на следующей неделе' in message:
+                if 'на следующей неделе' in message and 'пары' in message:
                     if 'понедельник' in message:
                         send_message(id, bc.byDayNext(0))
 
@@ -186,36 +158,27 @@ while True:
 
                 # --
 
-                if 'ссылк' in message and not 'наебнулась' in message:
-                    send_message(id,
-                                 'https://docs.google.com/spreadsheets/d/1bAFmdln_FvbtKY-WMmSj_cyhH9l3ELgo/edit')
-
                 if 'пары' in message and not "на следующей неделе" in message:
                     if 'сёдня' in message or 'сегодня' in message:
                         send_message(id, bc.AllForToday())
                     if 'завтра' in message:
-                        message = bc.tomorrowClasses()
-                        send_message(id, message)
-                    if 'понедельник' in message or 'пн' in message:
+                        send_message(id, bc.tomorrowClasses())
+                    if 'понедельник' in message:
                         send_message(id, bc.byDay(0))
                     if 'вторник' in message:
                         send_message(id, bc.byDay(1))
-                    if 'сред' in message or 'ср' in message:
+                    if 'сред' in message:
                         send_message(id, bc.byDay(2))
-                    if 'четверг' in message or 'чт' in message:
+                    if 'четверг' in message:
                         send_message(id, bc.byDay(3))
-                    if 'пятниц' in message or 'пт' in message:
+                    if 'пятниц' in message:
                         send_message(id, bc.byDay(4))
 
                 if 'какой' in message and 'к ' in message and 'завтра' in message:
                     send_message(id, bc.tomorrowClasses())
 
                 if 'черт' in message:
-                    week = datetime.date.today().isocalendar()[1]
-                    if week % 2 == 0:
-                        send_message(id, 'Сегодня смотрим над чертой')
-                    if week % 2 == 1:
-                        send_message(id, 'Сегодня смотрим под чертой')
+                    send_message(id, 'Сегодня смотрим ' + bc.whatLine())
 
                 # --
 
@@ -239,7 +202,7 @@ while True:
 
                 # --
 
-                if ("ссылка" in message or "ссылки" in message) and ("опять" in message):
+                if ("ссылка" in message or "ссылки" in message):
                     send_message(id,
                                  'https://www.pythonanywhere.com/user/Neykuratick/files/home/Neykuratick/main.py?edit')
 
@@ -272,17 +235,13 @@ while True:
                 if "седня пары" in message or "пары седня" in message:
                     send_message(id, 'Кирилл с Мефодием старались, придумывсали букавы а ты вот так вот знчит к ним относишься, да? Напоминаю, что у нас помимо е есть еще ё!!!')
 
-                if "heroku" in message:
-                    send_message(id, 'Хуёку, блять')
+                # if "heroku" in message:
+                #     send_message(id, 'Хуёку, блять')
 
                 if 'за' in message and 'мат' in message and ('извини' in message or 'извени' in message or 'прости' in message or 'сорян' in message):
                     send_message(id, 'Привет, это Замат. Я прощаю тебя, но больше так не будь')
 
-                # --
-
-                if 'maintain' in message:
-                    send_message(id,
-                                 'https://www.pythonanywhere.com/user/Neykuratick/files/home/Neykuratick/log.txt?edit\n' + str(
-                                     id))
-    except:
-        pass
+    except Exception as e:
+        print("У нас ашыбка " + e)
+        print("Reconnecting to vk servers")
+        time.sleep(3)
