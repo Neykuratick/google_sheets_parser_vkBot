@@ -11,6 +11,18 @@ class Backend:
     def __init__(self):
         self.text = ''
 
+    def getMessage(self, classIndex):
+        if classIndex == 1:
+            return "к первой"
+        if classIndex == 2:
+            return "ко второй"
+        if classIndex == 3:
+            return "к третьей"
+        if classIndex == 4:
+            return "к четвёртой"
+        if classIndex == 5:
+            return "к пятой"
+
     def whatLine(self):
         week = datetime.date.today().isocalendar()[1]
 
@@ -94,53 +106,35 @@ class Backend:
 
         return text
 
-        # if weekday < 3 or week % 2 == 0:  # just normal scraping
-        #     try:
-        #         # print(f'firstclass - {firstclass}\nfirstclass_const - {firstclass_const}\nlastclass - {lastclass}\nrange_const - {range_const}')
-        #         class_index = 0 # порядковый номер пары
-        #         for subject in range(firstclass + firstclass_const, lastclass, range_const):
-        #             # print(subject)
-        #             class_index += 1
-        #             text += self.addTime(class_index)
-        #             text += ch.readCol()['values'][19][subject]
-        #             try:
-        #                 text += '\nСсылка:'
-        #                 text += getLink(subject)
-        #             except:
-        #                 pass
-        #             text += '\n\n'
-        #     except:
-        #         pass
-        #
-        # elif weekday == 3 and week % 2 != 0:  # adds maths classes in case if they're not in there
-        #     try:
-        #         for subject in range(firstclass + firstclass_const, lastclass, range_const):
-        #             text += self.addTime(subject)
-        #             text += ch.readCol()['values'][19][subject]
-        #             try:
-        #                 text += getLink(subject)
-        #             except:
-        #                 pass
-        #             text += '\n\n'
-        #     except:
-        #         pass
-        #
-        #     text += '' # [НЕ ТОЧНО!!] 10:40 - 12:10 Пара Программирования
-        #
-        # elif weekday == 4 and week % 2 != 0:  # adds programming classes in case if they're not in there
-        #     try:
-        #         for subject in range(firstclass + firstclass_const, lastclass, range_const):
-        #             text += self.addTime(subject)
-        #             text += ch.readCol()['values'][19][subject]
-        #             try:
-        #                 text += getLink(subject)
-        #             except:
-        #                 pass
-        #             text += '\n\n'
-        #     except:
-        #         pass
-        #
-        #     text += ''
+    def firstClassScraper(self, weekday, week):
+        if weekday > 6:
+            weekday = 0
+
+        if weekday > 4:  # if tomorrow is saturday or sunday
+            return "Завтра адыхаем"
+
+        firstclass = weekday * 10
+        lastclass = firstclass + 11
+
+        if week % 2 != 0:
+            firstclass_const = 1
+            range_const = 2
+        else:
+            firstclass_const = 2
+            range_const = 2
+
+        try:
+            class_index = 0  # порядковый номер пары
+            for subject in range(firstclass + firstclass_const, lastclass, range_const):
+                class_index += 1
+                text = ch.readCol()['values'][19][subject]
+
+                if text != '':
+                    return "Нам " + self.getMessage(class_index) + " паре"
+            return "нам к первой паре"
+        except:
+            pass
+
 
     def AllForToday(self):
         weekday = datetime.datetime.today().weekday()
@@ -159,14 +153,21 @@ class Backend:
     def tomorrowClasses(self):
         weekday = datetime.datetime.today().weekday() + 1
         week = datetime.date.today().isocalendar()[1]
-        if weekday > 4:  # if tomorrow is saturday or sunday
-            return "Завтра адыхаем"
 
         if weekday > 6:
             weekday = 0
 
+        if weekday > 4:  # if tomorrow is saturday or sunday
+            return "Завтра адыхаем"
+
         dayTimedelta = abs(datetime.datetime.today().weekday() - weekday)
         return self.scraper(weekday, week, dayTimedelta)
+
+    def getFirstClassByDay(self):
+        weekday = datetime.datetime.today().weekday() + 1
+        week = datetime.date.today().isocalendar()[1]
+
+        return self.firstClassScraper(weekday, week)
 
     def byDayNext(self, weekday):  # by next week
         week = datetime.date.today().isocalendar()[1]
@@ -174,3 +175,25 @@ class Backend:
 
         dayTimedelta = abs(datetime.datetime.today().weekday() - weekday) + 7
         return self.scraper(weekday, week, dayTimedelta)
+
+    def getFirstClassToday(self):
+        weekday = datetime.datetime.today().weekday()
+        week = datetime.date.today().isocalendar()[1]
+
+        return self.firstClassScraper(weekday, week)
+
+    def getFirstClassTomorrow(self):
+        weekday = datetime.datetime.today().weekday() + 1
+        week = datetime.date.today().isocalendar()[1]
+
+        return self.firstClassScraper(weekday, week)
+
+    def getFirstClassByDay(self, weekday):
+        week = datetime.date.today().isocalendar()[1]
+
+        return self.firstClassScraper(weekday, week)
+
+    def getFirstClassByDayNext(self, weekday):
+        week = datetime.date.today().isocalendar()[1] + 1
+
+        return self.firstClassScraper(weekday, week)

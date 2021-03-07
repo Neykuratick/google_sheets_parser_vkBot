@@ -174,11 +174,49 @@ while True:
                     if 'пятниц' in message:
                         send_message(id, bc.byDay(4))
 
-                if 'какой' in message and 'к ' in message and 'завтра' in message:
-                    send_message(id, bc.tomorrowClasses())
-
                 if 'черт' in message:
                     send_message(id, 'Сегодня смотрим ' + bc.whatLine())
+
+                # --
+
+                if 'к какой' in message and 'паре' in message:
+                    if 'завтра' in message:
+                        send_message(id, bc.getFirstClassTomorrow())
+
+                    elif 'в понедельник' in message:
+                        if 'на следующей неделе' in message:
+                            send_message(id, bc.getFirstClassByDayNext(0))
+                        else:
+                            send_message(id, bc.getFirstClassByDay(0))
+
+                    elif 'во вторник' in message:
+                        if 'на следующей неделе' in message:
+                            send_message(id, bc.getFirstClassByDayNext(1))
+                        else:
+                            send_message(id, bc.getFirstClassByDay(1))
+
+                    elif 'в среду' in message:
+                        if 'на следующей неделе' in message:
+                            send_message(id, bc.getFirstClassByDayNext(2))
+                        else:
+                            send_message(id, bc.getFirstClassByDay(2))
+
+                    elif 'в четверг' in message:
+                        if 'на следующей неделе' in message:
+                            send_message(id, bc.getFirstClassByDayNext(3))
+                        else:
+                            send_message(id, bc.getFirstClassByDay(3))
+
+                    elif 'в пятницу' in message:
+                        if 'на следующей неделе' in message:
+                            send_message(id, bc.getFirstClassByDayNext(4))
+                        else:
+                            send_message(id, bc.getFirstClassByDay(4))
+
+                    else:
+                        send_message(id, bc.getFirstClassToday())
+
+                # --
 
                 # --
 
@@ -232,7 +270,7 @@ while True:
                 if "бля" in message or "хуй" in message or "пизд" in message:
                     send_message(id, 'ъуъ, не матерись, сука блеать')
 
-                if "седня пары" in message or "пары седня" in message:
+                if "седня" in message and "пары" in message:
                     send_message(id, 'Кирилл с Мефодием старались, придумывсали букавы а ты вот так вот знчит к ним относишься, да? Напоминаю, что у нас помимо е есть еще ё!!!')
 
                 # if "heroku" in message:
