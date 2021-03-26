@@ -2,7 +2,7 @@ from SheetHandler import SheetHandler
 from ConnectSheet import ConnectSheet
 from backend import Backend
 import json
-import datetime
+import requests
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 import vk_api
 import time
@@ -35,7 +35,7 @@ try:
     longpoll = VkBotLongPoll(vk, group_id)
     FOO_MESSAGE = 'HELLO'
 except Exception as e:
-    print("Kaput " + e)
+    print("Kaput " + str(e))
     print("Reconnecting to VK")
     time.sleep(3)
 
@@ -55,8 +55,10 @@ def get_button(label, color):
 keyboardMain = {
     'one_time': False,
     'buttons': [
-        [get_button('Ссылка', 'primary'), get_button('Сёдня пары', 'primary'),
+        [get_button('Сёдня пары', 'primary'),
          get_button('Завтра пары', 'primary'), get_button('Черта', 'primary')],
+
+        [get_button('К какой нам завтра паре?', 'primary')],
 
         [get_button('Эта неделя', 'positive'), get_button('Следующая неделя', 'positive')],
         [get_button('Клава иди в сраку', 'negative')]
@@ -218,6 +220,17 @@ while True:
 
                 # --
 
+                if 'биткоин' in message or 'биток' in message or 'btc' in message:
+                    r = requests.get('https://blockchain.info/ticker').json()
+                    btc_usd = round(r['USD']['15m'], 0)
+                    btc_usd = '{:,}'.format(btc_usd)
+                    btc_rub = round(r['RUB']['15m'], 0)
+                    result = round(btc_rub * 0.00039600, 0)
+                    btc_rub = '{:,}'.format(btc_rub)
+
+                    message_toSend = f'Биткоин стоит ${btc_usd}\nА в рублях - {btc_rub} руб.\n{result} - 1350 = {result - 1350}'
+                    send_message(id, message_toSend)
+
                 # --
 
                 if 'эта неделя' in message:
@@ -242,7 +255,19 @@ while True:
 
                 if ("ссылка" in message or "ссылки" in message):
                     send_message(id,
-                                 'https://www.pythonanywhere.com/user/Neykuratick/files/home/Neykuratick/main.py?edit')
+                                 """
+                                 чтобы включить бота, когда он сдох, надо перейти по этой сслыке:
+                                https://www.pythonanywhere.com/user/Neykuratick/files/home/Neykuratick/main.py?edit
+
+                                логин: neykuratick
+                                пароль: qq3CRVcwJT8eA.q (он гуглом был сгенерирован)
+
+                                дальше надо нажать на кнопку ">>> Run" в верхнем правом углу и подождать, пока запустится.
+                                Чтоб было удобней копировать с телефона, я пароль в новом сообщении напишу
+
+                                 """)
+
+                    send_message(id, "qq3CRVcwJT8eA.q")
 
                 if 'ха' in message:
                     hahasCount = 0
@@ -262,7 +287,8 @@ while True:
                         send_message(id, '1010101010101110101001 - НАСТОЛЬКО СИЛЬНО Я ОРУ ЫВХАЫХВАХЫВАХЫ')
 
                 if 'скотина' in message and 'бот' in message:
-                    if str(id) == '2000000002' or str(id) == '232444433' or str(id) == '2000000001':
+                    # print(event.object)
+                    if event.object.from_id == 232444433:
                         send_message(id, 'прости человек, я буду стараться лучше')
                     else:
                         send_message(id, 'пашол в срачку, кожанная коробка')
@@ -280,6 +306,9 @@ while True:
                     send_message(id, 'Привет, это Замат. Я прощаю тебя, но больше так не будь')
 
     except Exception as e:
-        print("У нас ашыбка " + e)
+        print("У нас ашыбка " + str(e))
         print("Reconnecting to vk servers")
         time.sleep(3)
+
+
+input()
