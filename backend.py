@@ -23,13 +23,11 @@ class Backend:
         if classIndex == 5:
             return "к пятой"
 
-    def whatLine(self):
-        week = datetime.date.today().isocalendar()[1]
-
-        if week % 2:
-            return 'над чертой'
-        else:
+    def whatLine(self, week):
+        if week % 2 == 0:
             return 'под чертой'
+        else:
+            return 'над чертой'
 
     def addTime(self, classNumber):
         text = ''
@@ -68,7 +66,7 @@ class Backend:
         elif weekday == 6:
             weekday_name = 'Воскресенье'
 
-        line = self.whatLine();
+        line = self.whatLine(week)
 
         firstclass = weekday * 10
         lastclass = firstclass + 11
@@ -132,7 +130,6 @@ class Backend:
         except:
             pass
 
-
     def AllForToday(self):
         weekday = datetime.datetime.today().weekday()
         week = datetime.date.today().isocalendar()[1]
@@ -156,7 +153,8 @@ class Backend:
 
     def tomorrowClasses(self):
         weekday = datetime.datetime.today().weekday() + 1
-        week = datetime.date.today().isocalendar()[1]
+        date = datetime.date.today() + datetime.timedelta(days=1)
+        week = date.isocalendar()[1]
 
         if weekday > 6:
             weekday = 0

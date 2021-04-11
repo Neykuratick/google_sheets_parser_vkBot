@@ -21,11 +21,10 @@ TOKEN = 'efa8f72bc9f5aab07245dbc8eb42f58551b1c56be06fc8ac549a92db582a9dfbd6866d4
 group_id = 198604544  # release
 
 """
-git add .
-git commit -m "commit"
-git push -u myorigin main
-git push heroku main
-heroku ps:scale worker=1
+https://console.cloud.google.com/compute/instances?project=euroexpress
+tmux ls
+tmux a -t 0 (whereas 0 - session id)
+:1,%d - to delete all lines in vim
 """
 
 try:
@@ -254,21 +253,22 @@ while True:
                 # --
 
                 elif ("ссылка" in message or "ссылки" in message):
-                    send_message(id,
-                                 """
-                                 чтобы включить бота, когда он сдох, надо перейти по этой сслыке:
-                                https://www.pythonanywhere.com/user/Neykuratick/files/home/Neykuratick/main.py?edit
+                    # send_message(id,
+                    #              """
+                    #              чтобы включить бота, когда он сдох, надо перейти по этой сслыке:
+                    #             https://www.pythonanywhere.com/user/Neykuratick/files/home/Neykuratick/main.py?edit
+                    #
+                    #             логин: neykuratick
+                    #             пароль: qq3CRVcwJT8eA.q (он гуглом был сгенерирован)
+                    #
+                    #             дальше надо нажать на кнопку ">>> Run" в верхнем правом углу и подождать, пока запустится.
+                    #             Чтоб было удобней копировать с телефона, я пароль в новом сообщении напишу
+                    #
+                    #              """)
 
-                                логин: neykuratick
-                                пароль: qq3CRVcwJT8eA.q (он гуглом был сгенерирован)
+                    # send_message(id, "qq3CRVcwJT8eA.q")
 
-                                дальше надо нажать на кнопку ">>> Run" в верхнем правом углу и подождать, пока запустится.
-                                Чтоб было удобней копировать с телефона, я пароль в новом сообщении напишу
-
-                                 """)
-
-                    send_message(id, "qq3CRVcwJT8eA.q")
-
+                    send_message(id, "https://console.cloud.google.com/compute/instances?project=euroexpress")
                 elif 'ха' in message:
                     hahasCount = 0
                     hahasList = hahaList(message)
