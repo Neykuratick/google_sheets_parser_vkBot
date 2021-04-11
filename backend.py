@@ -27,9 +27,9 @@ class Backend:
         week = datetime.date.today().isocalendar()[1]
 
         if week % 2:
-            return 'под чертой'
-        else:
             return 'над чертой'
+        else:
+            return 'под чертой'
 
     def addTime(self, classNumber):
         text = ''
@@ -51,7 +51,7 @@ class Backend:
         return text
 
     def scraper(self, weekday, week, dayTimedelta=0):
-        # future is how many days to add to the date
+        # dayTimedelta is how many days to add to the date
 
         if weekday == 0:
             weekday_name = 'Понедельник'
@@ -68,10 +68,7 @@ class Backend:
         elif weekday == 6:
             weekday_name = 'Воскресенье'
 
-        if week % 2:
-            line = 'под чертой'
-        else:
-            line = 'над чертой'
+        line = self.whatLine();
 
         firstclass = weekday * 10
         lastclass = firstclass + 11
@@ -147,7 +144,14 @@ class Backend:
     def byDay(self, weekday):
         week = datetime.date.today().isocalendar()[1]
 
-        dayTimedelta = abs(datetime.datetime.today().weekday() - weekday)
+        dayTimedelta = weekday - datetime.datetime.today().weekday()
+        return self.scraper(weekday, week, dayTimedelta)
+
+    def byDayNext(self, weekday):  # by next week
+        week = datetime.date.today().isocalendar()[1]
+        week += 1
+
+        dayTimedelta = weekday - datetime.datetime.today().weekday() + 7
         return self.scraper(weekday, week, dayTimedelta)
 
     def tomorrowClasses(self):
@@ -160,21 +164,14 @@ class Backend:
         if weekday > 4:  # if tomorrow is saturday or sunday
             return "Завтра адыхаем"
 
-        dayTimedelta = abs(datetime.datetime.today().weekday() - weekday)
-        return self.scraper(weekday, week, dayTimedelta)
+        # dayTimedelta = abs(datetime.datetime.today().weekday() - weekday)
+        return self.scraper(weekday, week)
 
     def getFirstClassByDay(self):
         weekday = datetime.datetime.today().weekday() + 1
         week = datetime.date.today().isocalendar()[1]
 
         return self.firstClassScraper(weekday, week)
-
-    def byDayNext(self, weekday):  # by next week
-        week = datetime.date.today().isocalendar()[1]
-        week += 1
-
-        dayTimedelta = abs(datetime.datetime.today().weekday() - weekday) + 7
-        return self.scraper(weekday, week, dayTimedelta)
 
     def getFirstClassToday(self):
         weekday = datetime.datetime.today().weekday()

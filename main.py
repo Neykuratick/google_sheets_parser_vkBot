@@ -146,42 +146,42 @@ while True:
                     if 'понедельник' in message:
                         send_message(id, bc.byDayNext(0))
 
-                    if 'вторник' in message:
+                    elif 'вторник' in message:
                         send_message(id, bc.byDayNext(1))
 
-                    if 'сред' in message:
+                    elif 'сред' in message:
                         send_message(id, bc.byDayNext(2))
 
-                    if 'четверг' in message:
+                    elif 'четверг' in message:
                         send_message(id, bc.byDayNext(3))
 
-                    if 'пятниц' in message:
+                    elif 'пятниц' in message:
                         send_message(id, bc.byDayNext(4))
 
                 # --
 
-                if 'пары' in message and not "на следующей неделе" in message:
+                elif 'пары' in message and not "на следующей неделе" in message:
                     if 'сёдня' in message or 'сегодня' in message:
                         send_message(id, bc.AllForToday())
-                    if 'завтра' in message:
+                    elif 'завтра' in message:
                         send_message(id, bc.tomorrowClasses())
-                    if 'понедельник' in message:
+                    elif 'понедельник' in message:
                         send_message(id, bc.byDay(0))
-                    if 'вторник' in message:
+                    elif 'вторник' in message:
                         send_message(id, bc.byDay(1))
-                    if 'сред' in message:
+                    elif 'сред' in message:
                         send_message(id, bc.byDay(2))
-                    if 'четверг' in message:
+                    elif 'четверг' in message:
                         send_message(id, bc.byDay(3))
-                    if 'пятниц' in message:
+                    elif 'пятниц' in message:
                         send_message(id, bc.byDay(4))
 
-                if 'черт' in message:
+                elif 'черт' in message:
                     send_message(id, 'Сегодня смотрим ' + bc.whatLine())
 
                 # --
 
-                if 'к какой' in message and 'паре' in message:
+                elif 'к какой' in message and 'паре' in message:
                     if 'завтра' in message:
                         send_message(id, bc.getFirstClassTomorrow())
 
@@ -220,7 +220,7 @@ while True:
 
                 # --
 
-                if 'биткоин' in message or 'биток' in message or 'btc' in message:
+                elif 'биткоин' in message or 'биток' in message or 'btc' in message:
                     r = requests.get('https://blockchain.info/ticker').json()
                     btc_usd = round(r['USD']['15m'], 0)
                     btc_usd = '{:,}'.format(btc_usd)
@@ -233,27 +233,27 @@ while True:
 
                 # --
 
-                if 'эта неделя' in message:
+                elif 'эта неделя' in message:
                     send_keyboard(id, keyboardThisWeek)
 
-                if 'следующая неделя' in message:
+                elif 'следующая неделя' in message:
                     send_keyboard(id, keyboardNextWeek)
 
-                if 'на главную' in message:
+                elif 'на главную' in message:
                     send_keyboard(id, keyboardMain)
 
-                if 'покежь клаву' in message:
+                elif 'покежь клаву' in message:
                     send_keyboard(id, keyboardMain)
 
-                if 'убери клаву' in message:
+                elif 'убери клаву' in message:
                     send_keyboard(id, keyboardHide)
 
-                if 'клава иди в сраку' in message:
+                elif 'клава иди в сраку' in message:
                     send_keyboard(id, keyboardHide)
 
                 # --
 
-                if ("ссылка" in message or "ссылки" in message):
+                elif ("ссылка" in message or "ссылки" in message):
                     send_message(id,
                                  """
                                  чтобы включить бота, когда он сдох, надо перейти по этой сслыке:
@@ -269,7 +269,7 @@ while True:
 
                     send_message(id, "qq3CRVcwJT8eA.q")
 
-                if 'ха' in message:
+                elif 'ха' in message:
                     hahasCount = 0
                     hahasList = hahaList(message)
 
@@ -280,35 +280,32 @@ while True:
                     if 2 < hahasCount <= 4:
                         send_message(id, 'Смешно')
 
-                    if 4 < hahasCount <= 7:
+                    elif 4 < hahasCount <= 7:
                         send_message(id, 'ыхвахывхывхыхвыавхавых бляяя')
 
-                    if hahasCount > 7:
+                    elif hahasCount > 7:
                         send_message(id, '1010101010101110101001 - НАСТОЛЬКО СИЛЬНО Я ОРУ ЫВХАЫХВАХЫВАХЫ')
 
-                if 'скотина' in message and 'бот' in message:
+                elif 'скотина' in message and 'бот' in message:
                     # print(event.object)
                     if event.object.from_id == 232444433:
                         send_message(id, 'прости человек, я буду стараться лучше')
                     else:
                         send_message(id, 'пашол в срачку, кожанная коробка')
 
-                if "бля" in message or "хуй" in message or "пизд" in message:
+                elif " бля" in message or " хуй" in message or " пизд" in message:
                     send_message(id, 'ъуъ, не матерись, сука блеать')
 
-                if "седня" in message and "пары" in message:
+                elif "седня" in message and "пары" in message:
                     send_message(id, 'Кирилл с Мефодием старались, придумывсали букавы а ты вот так вот знчит к ним относишься, да? Напоминаю, что у нас помимо е есть еще ё!!!')
 
                 # if "heroku" in message:
                 #     send_message(id, 'Хуёку, блять')
 
-                if 'за' in message and 'мат' in message and ('извини' in message or 'извени' in message or 'прости' in message or 'сорян' in message):
+                elif 'за' in message and 'мат' in message and ('извини' in message or 'извени' in message or 'прости' in message or 'сорян' in message):
                     send_message(id, 'Привет, это Замат. Я прощаю тебя, но больше так не будь')
 
     except Exception as e:
         print("У нас ашыбка " + str(e))
         print("Reconnecting to vk servers")
         time.sleep(3)
-
-
-input()
